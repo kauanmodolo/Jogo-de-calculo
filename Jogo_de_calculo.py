@@ -20,40 +20,50 @@ def main():
         dificuldade = int(input("Digite sua opção (1-5): "))
 
         if dificuldade == 5:
-         break
+            break
 
         errado = 0
-        pontuação = 0
+        pontuacao = 0
 
+        while errado != 1:
+            questao, resposta_correta = Gerar_questao.gerar_questao(dificuldade)
+            print(f"Resolva a questão: {questao}")
 
-        while errado !=1:
-         questão, resposta_correta = Gerar_questao.gerar_questao(dificuldade)
-         print(f"Resolva a questão: {questão}")
-         resposta_usuario = int(input("Digite sua resposta: "))
-         if resposta_usuario == resposta_correta:
-          print("Você acertou!")
-          pontuação +=1
-          print(f"Pontuação atual: {pontuação}")
+            resposta_valida = False
+            while not resposta_valida:
+                try:
+                    resposta_usuario = int(input("Digite sua resposta: "))
+                    resposta_valida = True  # A resposta é válida se a conversão para int for bem-sucedida
+                except ValueError:
+                    print("Entrada inválida! Por favor, insira um número.")
 
-         else:
-          print(f"Resposta errada! A resposta correta era {resposta_correta}")
-          errado = 1
-          
-          leaderboard[nome_jogador] = pontuação
+            if resposta_usuario == resposta_correta:
+                print("Você acertou!")
+                pontuacao += 1
+                print(f"Pontuação atual: {pontuacao}")
+            else:
+                print(f"Resposta errada! A resposta correta era {resposta_correta}")
+                errado = 1
 
-          print("---- Fim do jogo ----")
-          print(f"Sua pontuação final foi: {pontuação}")
-        
-          print("---- Leaderboard ----")
-          for nome, pontos in sorted(leaderboard.items(), key=itemgetter(1), reverse=True):
-           print(f"{nome}: {pontos} pontos")
-           
-          continuar = input("Você quer jogar novamente? (s/n): ").lower()
+        # Atualizar o leaderboard com a maior pontuação do jogador
+        if nome_jogador in leaderboard:
+            # Se o jogador já existir, mantém a maior pontuação
+            if pontuacao > leaderboard[nome_jogador]:
+                leaderboard[nome_jogador] = pontuacao
+        else:
+            leaderboard[nome_jogador] = pontuacao
 
-print("Obrigado por jogar")
+        print("---- Fim do jogo ----")
+        print(f"Sua pontuação final foi: {pontuacao}")
 
+        # Exibir o leaderboard
+        print("---- Leaderboard ----")
+        for nome, pontos in sorted(leaderboard.items(), key=itemgetter(1), reverse=True):
+            print(f"{nome}: {pontos} pontos")
+
+        continuar = input("Você quer jogar novamente? (s/n): ").lower()
+
+    print("Obrigado por jogar")
 
 if __name__ == "__main__":
-   main()
-
-        
+    main()

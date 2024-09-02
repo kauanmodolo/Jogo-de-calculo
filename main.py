@@ -55,17 +55,20 @@ class JogoDeCalculoApp:
 
         while errado != 1:
             questao, resposta_correta = Gerar_questao.gerar_questao(dificuldade)
-            resposta_usuario = simpledialog.askstring("Questão", f"Resolva a questão: {questao}")
 
-            if resposta_usuario is None:  # Se o usuário cancelar a entrada
-                messagebox.showinfo("Jogo cancelado", "Você cancelou o jogo.")
-                return
+            resposta_valida = False  # Variável para controlar a validade da resposta
+            while not resposta_valida:
+                resposta_usuario = simpledialog.askstring("Questão", f"Resolva a questão: {questao}")
 
-            try:
-                resposta_usuario = int(resposta_usuario)
-            except ValueError:
-                messagebox.showerror("Erro", "Resposta inválida. Por favor, insira um número.")
-                continue
+                if resposta_usuario is None:  # Se o usuário cancelar a entrada
+                    messagebox.showinfo("Jogo cancelado", "Você cancelou o jogo.")
+                    return
+
+                try:
+                    resposta_usuario = int(resposta_usuario)
+                    resposta_valida = True  # Se a conversão for bem-sucedida, a resposta é válida
+                except ValueError:
+                    messagebox.showerror("Erro", "Resposta inválida. Por favor, insira um número.")
 
             if resposta_usuario == resposta_correta:
                 messagebox.showinfo("Correto!", "Você acertou!")
@@ -74,9 +77,10 @@ class JogoDeCalculoApp:
                 messagebox.showinfo("Errado!", f"Resposta errada! A resposta correta era {resposta_correta}")
                 errado = 1
 
-        # Atualizar o leaderboard com a pontuação do jogador
+        # Atualizar o leaderboard com a maior pontuação do jogador
         if nome_jogador in self.leaderboard:
-            self.leaderboard[nome_jogador] += pontuacao
+            if pontuacao > self.leaderboard[nome_jogador]:
+                self.leaderboard[nome_jogador] = pontuacao
         else:
             self.leaderboard[nome_jogador] = pontuacao
 
