@@ -22,7 +22,3 @@ Essas são as tecnologias utilizadas no projeto:
 <br>
 Python
 tkinter library
-
-## 📫 Contato
-
-Kauan Modolo Carriço - [Linkedin](www.linkedin.com/in/kauan-modolo-carriço) - kauanmodolo@hotmail.com
