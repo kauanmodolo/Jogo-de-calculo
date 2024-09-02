@@ -1,8 +1,8 @@
-('C:\\Users\\kauan\\OneDrive\\Área de Trabalho\\Projetos\\Exatas '
- 'Game\\build\\main\\PYZ-00.pyz',
+('C:\\Users\\kauan\\OneDrive\\Documentos\\Projetos\\Jogo de '
+ 'Cálculo\\build\\main\\PYZ-00.pyz',
  [('Gerar_questao',
-   'C:\\Users\\kauan\\OneDrive\\Área de Trabalho\\Projetos\\Exatas '
-   'Game\\Gerar_questao.py',
+   'C:\\Users\\kauan\\OneDrive\\Documentos\\Projetos\\Jogo de '
+   'Cálculo\\Gerar_questao.py',
    'PYMODULE'),
   ('_compat_pickle',
    'C:\\Program Files\\Python311\\Lib\\_compat_pickle.py',
